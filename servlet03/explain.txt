@@ -1,0 +1,3 @@
+思考：init 方法中的ServletConfig 对象是谁创建的？是谁传过来的
+都是 Tomcat 干的
+Tomcat 服务器先创建了 ServletConfig 对象，然后调用init()方法，将ServletConfig对象传给了init()方法

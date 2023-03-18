@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+         version="4.0">
+
+<!--    上下文的初始化参数: 以下的这些配置信息，可以通过getServletContext对象来获取到：
+注意这个配置信息是对应整个的webapp的。不是其中的某个模块
+注意：以下配置信息属于应用级配置信息，一般一个项目中共享的配置信息会放到以上的标签当中
+如果你的配置信息只是想给某一个servlet作为参考,那么你配置到servlet标签当中即可，使用ServletConfig对象来获取
+应用的根路径，在Java源码当中，不要将应用的根路径写死了，因为你永远都不知道这个应用在最终部署的时候。是在各个服务器上
+例如：linux 服务器是没有 盘符的说法的。
+
+-->
+    <context-param>
+        <param-name>pageSize</param-name>
+        <param-value>10</param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>starLIndex</param-name>
+        <param-value>0</param-value>
+    </context-param>
+
+    <servlet>
+        <!--            注意：两个 name 需要一致-->
+        <servlet-name>AServlet</servlet-name>
+<!--        全限定类名：反射实例化对象-->
+        <servlet-class>com.RainbowSea.servlet.AServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AServlet</servlet-name>
+        <!--        注意 / 开始: 因为 url 是以 / 分割的-->
+        <url-pattern>/servlet/A</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+<!--        注意：两个name 保持一致-->
+        <servlet-name>BServlet</servlet-name>
+<!--        全限定类名: 无参构造器 反射实例化对象-->
+        <servlet-class>com.RainbowSea.servlet.BServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>BServlet</servlet-name>
+<!--        注意: / 开始 -->
+        <url-pattern>/servlet/B</url-pattern>
+    </servlet-mapping>
+</web-app>
