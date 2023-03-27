@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+         version="4.0">
+
+    <servlet>
+        <!--        注意：两个name 保持一致-->
+        <servlet-name>getServlet</servlet-name>
+        <servlet-class>com.RainbowSea.servlet.getServelt</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>getServlet</servlet-name>
+        <!--        注意： / 开始-->
+        <url-pattern>/get</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <servlet-name>postServlet</servlet-name>
+        <servlet-class>com.RainbowSea.servlet.PostServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>postServlet</servlet-name>
+        <url-pattern>/post</url-pattern>
+
+    </servlet-mapping>
+</web-app>
