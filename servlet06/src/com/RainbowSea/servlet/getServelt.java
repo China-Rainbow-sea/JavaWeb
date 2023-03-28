@@ -13,7 +13,7 @@ public class getServelt extends GenericServlet {
             throws ServletException, IOException {
 
         // 响应一些内容到浏览器上
-        response.setContentType("text/html;setChat=UTF-8");  // 设置显示格式
+        response.setContentType("text/html;charSet=UTF-8");  // 设置显示格式
         PrintWriter writer = response.getWriter();
 
         // 注意 println() 和 print()的区别：

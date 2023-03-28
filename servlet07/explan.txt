@@ -1,0 +1,74 @@
+HttpServletRequest是一个接口，全限定名称为：jakarta.servlet.httpServletRequest
+HttpServletRequest接口是Servlet规范的一员。
+HttpServletRequest接口的父接口是 ServletRequest
+HttpServletRequest接口的实现类是谁写的：
+通过测试是: org.apache.catalina.connector.RequestFacade 实现了HttpServletRequest 注意这里是基于 Tomcat 10
+
+HttpServletRequest接口是谁给创建的 ？
+Tomcat 服务器，Web容器，实现了HttpServletRequest接口，还是说明了Tomcat服务器实现了。
+Servlet 规范，而对于我们的javaWeb程序员来说，实际上不需要关心这个，我们只需要面向接口编程即可，
+我们关心的是HttpServletRequest接口中有哪些方法，这些方法可以完成什么功能 ？
+
+HttpServletRequest对象中有都有什么信息 ？ 都包装了什么信息 ？
+实际上是用户发送请求的时候，遵循了HttP协议，发送的是HTTP的请求协议，Tomcat服务器将HTTP协议中
+的信息以及数据全部解析出来，然后Tomcat服务器把这些信息封装到HttpServletRequest对象当中，传给我们javaWeb程序员。
+javaWeb程序员面向HttpServletRequest接口编程，调用方法就可以获取到请求的信息了。
+
+request 和 response 对象的生命周期 ？
+request 对象和 response 对象，一个是请求对象，一个是响应对象，这两个对象只在当前请求对象中有效
+ > 一次请求对应一个request.
+ > 两次请求则对应两个request.
+ > ......
+
+
+ 思考:如果是你,前端的form表单提交数据之后,你准备怎么存储这些数据,你准备采用什么样的数据结构存储这些数据呢?
+ 前端提交的数据格式: username=abc&userpwd=111&alhao=s&aihaod&aihao=tt
+ 如果采用 Map<String,String>  key 存储String,value 存储String
+ 这种想法是不对的,因为我们的 key 是会重复的,而Map中的 key 是不可以重复的,会覆盖.
+
+ Map<String,String[]> 这个方式就可以, key 存储 String value存储String[]
+ username ["abc"]
+ aihao  ["s","d","tt"]
+
+注意: 前端表单提交数据的时候,假设提交了120这样的"数字",其实是以字符串 "123"的方式提交的,所以
+服务器捕获取到的一定是一个字符串的 "120",而不是一个数字.(前端永远提交的都是字符串,后端获取的也永远是字符串)
+
+request对象实际上又称之为 请求域对象:
+应用域对象是什么:
+什么情况下会考虑向ServletContext这个应用域当中绑定数据呢?
+  > 第一:所有用户共享的数据
+  > 第二: 数据两小
+  > 第三: 很少被修改的数据
+以上三个条件都满足的请情况下,使用这个应用域对象,可以大大提高我们程序的执行效率.
+实际上向应用域当中绑定数据,就相当域把数据放到了缓存(Cache)当中,然后用户访问的时候,直接从缓存中
+取,减少IO的操作,大大提升系统的性能,所以缓存技术是提高系统性能的重要手段.
+
+你见过哪些缓存技术:
+字符串常量池,数据库连接池(提前创建了N个连接对象,将连接对象放到集合当中,使用连接对象的时候,
+直接从缓存对象,省去了连接池的创建过程,效率提升)
+线程池(Tomcat服务器就是支持多线程的,所谓的线程池就是提前先创建了 N 个线程对象,将线程对象存储到集合
+中,然后用户请求过来之后,直接从线程池中获取线程对象,直接拿来用,提升系统性能)
+后期你还会学习更多的缓存技术?,例如:redis,mongoDB......
+ServletContest 应用域的操作方法:
+void setAttribute(String name,Object obj);  // 向域当中绑定数据.
+void getAttribute(String name);   // 从域当中根据name 获取数据
+void removeAttribute(String name);  // 将域当中绑定的数据移除.
+
+以上的操作应用域类似域集合 Map的操作.
+Map<String,Object> map;
+map.put("name",obj);  // 向map集合中放key 和value
+Object obj = map.get("name");  // 通过map集合的key获取value
+map.remove("name");  // 通过Map集合的key 删除key 和value这个键值对.
+
+
+请求域:对象
+"请求域对象"要比"应用域"对象的范围小很多,生命周期短很多,请求域只在一次请求内有效.
+请求域对象也有三个方法:
+void setAttribute(String name,Object obj); // 向域当中绑定数据
+object getAttribute(String name); // 从域当中根据name获取数据
+void removeAttribute(String name);  // 将域当中绑定的数据移除.
+
+请求域和应用域的选用原则不同:
+> 尽量使用小的域对象,因为小的域对象占用的资源较少.
+
+

@@ -4,6 +4,27 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
 
+
+    <servlet>
+        <servlet-name>WelcomeServlet</servlet-name>
+        <servlet-class>com.RainbowSea.servlet.welcome.WelcomeServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>WelcomeServlet</servlet-name>
+        <url-pattern>/Welcome/hello/start</url-pattern>
+    </servlet-mapping>
+    <!--    服务器打开的初始打开的页面显示-->
+    <welcome-file-list>
+        <!--        welcome-file 设置的起始打开的页面，也可以是 Servlet 请求服务器,注意起始不要有“/” 斜杆
+        不然无法找到-->
+        <welcome-file>Welcome/hello/start</welcome-file>
+        <!--        如果该项目的web目录下含有子目录，则需要指明该web下的哪个子目录下的文件-->
+        <welcome-file>page1/page2/login3.html</welcome-file>
+        <!--        默认是从一个项目的 web 目录下开始找的-->
+        <welcome-file>login2.html</welcome-file> <!--将login.html 设置为一个服务器启动打开的开始首页页面-->
+        <!--        可以写多个 welcome-file 当第一个找不到时，会向下找第二个，第二找不到，找第三个，如果全部都没有找到返回404错误-->
+    </welcome-file-list>
+
     <servlet>
         <!--        注意：两个name 保持一致-->
         <servlet-name>getServlet</servlet-name>
@@ -24,5 +45,26 @@
         <servlet-name>postServlet</servlet-name>
         <url-pattern>/post</url-pattern>
 
+    </servlet-mapping>
+
+
+    <servlet>
+        <!--        注意：两 name 保持一致-->
+        <servlet-name>HelloServlet</servlet-name>
+        <servlet-class>com.RainbowSea.servlet.httpServlet.HelloServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>HelloServlet</servlet-name>
+        <!--        注意： 以 / 开始-->
+        <url-pattern>/HelloServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>loginServlet</servlet-name>
+        <servlet-class>com.RainbowSea.servlet.httpServlet.logServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>loginServlet</servlet-name>
+        <url-pattern>/login</url-pattern>
     </servlet-mapping>
 </web-app>

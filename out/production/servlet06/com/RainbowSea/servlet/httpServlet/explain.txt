@@ -1,0 +1,35 @@
+
+HttpServlet 类是专门为HTTP协议准备的，比GenericServlet 更加适合HTTP协议下的开发。
+HttpServlet 在tomcat 10 : jakarta.servlet.http.HttpServlet
+              tomcat 8 :  javax.servlet.http.HttpServlet
+到目前为止我们接触了servlet 规范中哪些接口：
+这里以：tomcat 10 为例：、
+jakarta.servlet.servlet.Servlet 核心接口
+jakarta.servlet.servletConfig Servlet配置信息接口
+jakarta.servlet.servletContext Servlet上下接口
+jakarta.servlet.servletRequest Servlet请求接口
+jakarta.servlet.servletResponse Servlet响应接口
+jakarta.servlet.servletException Servlet异常类。
+
+http包下都有哪些类和接口呢 ： 这里以 tomcat 10 为例子：jakarta.servlet.http.*;
+> jakarta.servlet.http.HttpServlet (Http协议专用的Servlet 类，抽象类)
+> jakarta.servlet.http.HttpServletRequest(HTTP协议专用的请求对象)
+> jakarta.servlet.http.HttpServletResponse(HTTP协议专用的响应对象)
+
+HTTPServletRequest 对象中封装了什么信息？
+ HttpServletRequest 简称为：request 对象。封装了请求协议的全部内容。
+ HttpServletResponse 简称为: response 对象
+ Tomcat 服务器（web服务器）将“请求协议”中的数据全部解析出来，然后将这些数据全部封装到request对象当中去了。
+ 也就是面向HttpServletRequest 接口编程，就可以获取请求协议中的数据。
+HttpServletResponse 对象是专门用来响应HTTP协议到浏览器的。
+回忆Servlet 的生命周期：
+用户第一次请求：
+Tomcat 服务器通过发射机制，调用该类的Servlet 类的无参构造器，创建Servlet对象，（web.xml文件）中配置的Servlet类对应的对象
+Tomcat 服务器调用Servlet 对象的init()方法完成初始化。
+Tomcat 服务器调用Servlet对象的service()方法处理请求。
+用户第二次请求：
+Tomcat 服务器调用Servlet对象的service()方法处理请求。
+
+服务器关闭：
+Tomcat 服务器调用Servlet对象的destroy()方法，做销毁之前的准备工作。
+Tomcat 服务器销毁Servlet对象。

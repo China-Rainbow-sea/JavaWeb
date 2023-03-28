@@ -11,7 +11,7 @@ public class PostServlet extends GenericServlet {
     @Override
     public void service(ServletRequest request, ServletResponse response) throws ServletException, IOException {
         // 响应一些内容到浏览器上
-        response.setContentType("text/html;setChat=UTF-8");  // 设置显示格式
+        response.setContentType("text/html;charSet=UTF-8");  // 设置显示格式
         PrintWriter writer = response.getWriter();
 
         writer.println("<!doctype html>");
