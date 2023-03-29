@@ -20,12 +20,12 @@ public class AServlet extends HttpServlet {
         request.setAttribute("sysTime",nowTime);
 
         // 从request域当中取出绑定的数据.
-        Object sysTime = request.getAttribute("sysTime");
+        /*Object sysTime = request.getAttribute("sysTime");
 
         // 输出到浏览器上
         response.setContentType("text/html;charSet=utf-8");
         PrintWriter writer = response.getWriter();
-        writer.println("request域当中以获取的系统当前时间: " + sysTime);
+        writer.println("request域当中以获取的系统当前时间: " + sysTime);*/
 
 
         // 这样做可以吗?
@@ -39,7 +39,8 @@ public class AServlet extends HttpServlet {
         // 执行了AServlet之后,跳转到BServlet ,(这个资源跳转可以使用转发机制来完成)
         // 第一步:获取到请求转发对象.
         // 相当于把 "/B" 这个路径包装到请求转发器当中,实际上是把下一跳转的资源路径告知给Tomcat服务器了.
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/b");
+        // 注意存储抓转发的应用区别
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/B");
 
         // 第二步: 调用请求转发器RequestDispatcher的forward()方法,进行转发:
         // 转发的时候:这两个参数很重要,request和response都是要传递给下一个资源的

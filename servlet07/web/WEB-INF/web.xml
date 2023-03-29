@@ -17,8 +17,6 @@
     </servlet-mapping>
 
 
-
-
     <servlet>
         <!--        注意两个name ,保持一致-->
         <servlet-name>AServlet</servlet-name>
@@ -38,7 +36,38 @@
     <servlet-mapping>
         <servlet-name>BServlet</servlet-name>
         <!--        注意 / 开始-->
-        <url-pattern>/b</url-pattern>
+        <url-pattern>/B</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <!--        注意两个name值一致-->
+        <servlet-name>TestServlet</servlet-name>
+        <servlet-class>com.RainbowSea.servlet.TestServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>TestServlet</servlet-name>
+        <!--        注意 / 开始-->
+        <url-pattern>/Test</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <servlet-name>RequestMethod</servlet-name>
+        <servlet-class>com.RainbowSea.servlet.RequestMethod</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RequestMethod</servlet-name>
+        <url-pattern>/Method</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <servlet-name>UserSaveServlet</servlet-name>
+        <servlet-class>com.RainbowSea.servlet.UserSaveServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UserSaveServlet</servlet-name>
+        <url-pattern>/User</url-pattern>
     </servlet-mapping>
 
 

@@ -72,3 +72,16 @@ void removeAttribute(String name);  // 将域当中绑定的数据移除.
 > 尽量使用小的域对象,因为小的域对象占用的资源较少.
 
 
+两个Servlet怎么共享数据
+> 将数据放到ServletContext应用域当中，当然是可以的，但是应用域的范围太大了，占用资源太多了，
+不建议使用，可以将数据放到request（请求域）当中，然后AServlet转发到BServet，保证AServlet和BServlet
+在同一次请求当中，这样就可以 做到两个Servlet，或者多个Servlet共享同一份数据.
+
+
+关于request对象中非常容易混淆的方法:
+//uri?username=zhangsan&userpossword=123
+String username = request.getParameter("username") 获取到的是用户在浏览器上提交的数据
+
+request.setAttribute("name",new Object());  //之前一定是执行过这个
+Object obj = request.getAttribute("name");  // 获取到绑定在请求域当中的数据。
+
