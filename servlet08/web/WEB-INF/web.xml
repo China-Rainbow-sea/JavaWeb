@@ -6,16 +6,11 @@
 
 
     <servlet>
-        <servlet-name>HelloServlet</servlet-name>
-        <servlet-class>com.RainbowSea.servlet.HelloServlet</servlet-class>
+        <servlet-name>HttpServletTest</servlet-name>
+        <servlet-class>com.RainbowSea.servlet.HttpServletTest</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>HelloServlet</servlet-name>
-        <url-pattern>/Hello/test</url-pattern>
+        <servlet-name>HttpServletTest</servlet-name>
+        <url-pattern>/Test</url-pattern>
     </servlet-mapping>
-    <welcome-file-list>
-        <!--        注意如果是：Servlet 服务器资源的话，该路径就为对应在 web.xml 中 <url-pattern>
-        标签当中设置的url 映射路径，同样的不要加： “/” -->
-        <welcome-file>Hello/test</welcome-file>
-    </welcome-file-list>
 </web-app>
