@@ -4,13 +4,12 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
 
-
     <servlet>
-        <servlet-name>HttpServletTest</servlet-name>
-        <servlet-class>com.RainbowSea.servlet.HttpServletTest</servlet-class>
+        <servlet-name>TestServlet</servlet-name>
+        <servlet-class>com.RainbowSea.servlet.TestServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>HttpServletTest</servlet-name>
+        <servlet-name>TestServlet</servlet-name>
         <url-pattern>/Test</url-pattern>
     </servlet-mapping>
 </web-app>
