@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+         version="4.0">
+
+
+    <!--     查看部门列表-->
+    <servlet>
+        <!--        注意: 两个name值要保持一致-->
+        <servlet-name>list</servlet-name>
+        <servlet-class>com.RainbowSea.servlet.DeptListServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>list</servlet-name>
+        <!--        注意是: / 开始-->
+        <url-pattern>/dept/list/</url-pattern>
+    </servlet-mapping>
+
+
+    <!--    部门详情-->
+    <servlet>
+        <servlet-name>detail</servlet-name>
+        <servlet-class>com.RainbowSea.servlet.DeptDetailServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>detail</servlet-name>
+        <url-pattern>/dept/detail</url-pattern>
+    </servlet-mapping>
+
+
+    <!--    删除部门-->
+    <servlet>
+        <servlet-name>delete</servlet-name>
+        <servlet-class>com.RainbowSea.servlet.DeptDelServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>delete</servlet-name>
+        <!--        / 开始-->
+        <url-pattern>/dept/delete</url-pattern>
+    </servlet-mapping>
+
+    <!--    新增部门-->
+    <servlet>
+        <servlet-name>save</servlet-name>
+        <servlet-class>com.RainbowSea.servlet.DeptSaveServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>save</servlet-name>
+        <url-pattern>/dept/save</url-pattern>
+    </servlet-mapping>
+
+</web-app>
