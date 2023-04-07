@@ -50,4 +50,27 @@
         <url-pattern>/dept/save</url-pattern>
     </servlet-mapping>
 
+    <!--    跳转到修改部门-->
+    <servlet>
+        <!--        两个 name 保持一致-->
+        <servlet-name>edit</servlet-name>
+        <servlet-class>com.RainbowSea.servlet.DepEditServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>edit</servlet-name>
+        <!--        "/" 开始-->
+        <url-pattern>/dept/edit</url-pattern>
+    </servlet-mapping>
+
+
+    <!--    修改部门信息-->
+    <servlet>
+        <servlet-name>modify</servlet-name>
+        <servlet-class>com.RainbowSea.servlet.DeptModifyServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>modify</servlet-name>
+        <url-pattern>/dept/modify</url-pattern>
+    </servlet-mapping>
+
 </web-app>

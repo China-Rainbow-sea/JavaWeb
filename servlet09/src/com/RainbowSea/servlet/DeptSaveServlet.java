@@ -11,6 +11,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+
+/**
+ * 增加部门数据
+ */
 public class DeptSaveServlet extends HttpServlet {
     // 前端是注册信息，是post 请求
     @Override
@@ -65,11 +69,16 @@ public class DeptSaveServlet extends HttpServlet {
         if (count == 1) {
             // 这里应该使用，重定向
             // 这里用的转发，是服务器内部的，不要加项目名
-            request.getRequestDispatcher("/dept/list/").forward(request, response);
+            //request.getRequestDispatcher("/dept/list/").forward(request, response);
+
+            // 重定向
+            response.sendRedirect(request.getContextPath() + "/dept/list/");
         } else {
             // 保存失败
             // web当中的 html资源，这里的 "/" 表示 web 目录
-            request.getRequestDispatcher("/error.html").forward(request, response);
+            //request.getRequestDispatcher("/error.html").forward(request, response);
+
+            response.sendRedirect(request.getContextPath() + "/error.html");
         }
 
 

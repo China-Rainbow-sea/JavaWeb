@@ -14,6 +14,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+
+/**
+ * 部门列表
+ */
 public class DeptListServlet extends HttpServlet {
 
     /*
@@ -21,6 +25,10 @@ public class DeptListServlet extends HttpServlet {
     的请求是doPost,从 doPost 请求  "转发"出来的同样是 doPost请求的，而 重定向就是doGet请求了，无论是doPost,doGet请求都是
     所以这里为了，处理接受到 DeptSaveServlet 的新增部门的 "转发"请求，写了一个doPost 请求处理
      */
+
+
+    // 优化，将转发，替换成了 重定向的机制，（重定向的机制）是自发到浏览器前端的地址栏上的，后自发的执行
+    // 地址栏上是 doGet 请求的，就不需要 doPost 请求了。
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException,
             IOException {

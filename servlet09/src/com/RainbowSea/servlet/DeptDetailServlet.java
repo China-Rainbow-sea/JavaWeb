@@ -14,6 +14,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 
+/**
+ * 部门详情
+ */
 public class DeptDetailServlet extends HttpServlet {
 
     // 前端超连接是 doGet()请求

@@ -12,6 +12,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+
+/**
+ * 删除部门
+ */
 public class DeptDelServlet extends HttpServlet {
 
 
@@ -56,13 +60,13 @@ public class DeptDelServlet extends HttpServlet {
             preparedStatement = connection.prepareStatement(sql);
 
             // 3. 填充占位符，真正的执行sql语句
-            preparedStatement.setString(1,deptno);
+            preparedStatement.setString(1, deptno);
             // 返回影响数据库的行数
             count = preparedStatement.executeUpdate();
             connection.commit();  // 手动提交数据
         } catch (SQLException e) {
             // 遇到异常回滚
-            if(connection != null) {
+            if (connection != null) {
                 try {
                     // 事务的回滚
                     connection.rollback();
@@ -74,19 +78,26 @@ public class DeptDelServlet extends HttpServlet {
         } finally {
             // 4. 释放资源
             // 因为这里是删除数据，没有查询操作，所以 没有 ResultSet 可以传null
-            DBUtil.close(connection,preparedStatement,null);
+            DBUtil.close(connection, preparedStatement, null);
         }
 
-        if(count == 1) {
+        if (count == 1) {
             // 删除成功
             // 仍然跳转到部门列表页面
             // 部门列表页面的显示需要执行另外一个Servlet，怎么办，可以使用跳转，不过这里最后是使用重定向
             // 注意：转发是在服务器间的，所以不要加“项目名” 而是 / + web.xml 映射的路径即可
-            request.getRequestDispatcher("/dept/list/").forward(request,response);
+            //request.getRequestDispatcher("/dept/list/").forward(request,response);
+
+            // 优化：使用重定向机制 注意: 重定向是自发到前端的地址栏上的，前端所以需要指明项目名
+            // 注意: request.getContextPath() 返回的根路径是，包含了 "/" 的
+            response.sendRedirect(request.getContextPath() + "/dept/list/");
         } else {
             // 删除失败
             // web当中的 html资源，这里的 "/" 表示 web 目录
-            request.getRequestDispatcher("/error.html/").forward(request,response);
+            //request.getRequestDispatcher("/error.html/").forward(request, response);
+
+            // 优化，使用重定向
+            response.sendRedirect(request.getContextPath() + "/error.html/");
         }
 
 
