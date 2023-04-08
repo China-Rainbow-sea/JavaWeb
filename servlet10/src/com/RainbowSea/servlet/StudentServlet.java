@@ -53,9 +53,14 @@ public class StudentServlet extends HttpServlet {
         if(count == 1) {
             // 添加成功
             // 先用 转发机制 ,转发服务器内部，不要加项目名
-            request.getRequestDispatcher("/succeed.html").forward(request,response);
+            // request.getRequestDispatcher("/succeed.html").forward(request,response);
+
+            // 优化修改为重定向：重定向前端需要指明 项目名(/项目的根路径)
+            // request.getContextPath() 该方法可以获取到: "/项目的根路径"，注意是带有 / 的，所以不要多写了 /
+            response.sendRedirect(request.getContextPath()+"/succeed.html");
         } else {
-            request.getRequestDispatcher("/error.html").forward(request,response);
+            // request.getRequestDispatcher("/error.html").forward(request,response);
+            response.sendRedirect(request.getContextPath()+"/error.html");
         }
     }
 }

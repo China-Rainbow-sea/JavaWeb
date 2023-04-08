@@ -20,8 +20,9 @@ import java.sql.SQLException;
  */
 
 //@WebServlet(value = {"/dept/list","/dept/save","/dept/edit","/dept/detail","/dept/delete","/dept/modify"}
-// @WebServlet("/dept/*") 模糊查询，注意：这个需要解决正则表达式的匹配问题
-@WebServlet({"/dept/list", "/dept/save", "/dept/edit", "/dept/detail", "/dept/delete", "/dept/modify"})
+
+//@WebServlet({"/dept/list", "/dept/save", "/dept/edit", "/dept/detail", "/dept/delete", "/dept/modify"})
+@WebServlet("/dept/*")  // 可以使用模糊查询，* 任意字符串，表示/dept/xxx的任意都可以访问该Servlet
 public class DeptServlet extends HttpServlet {
 
     // 模板方法

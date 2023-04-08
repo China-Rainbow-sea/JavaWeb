@@ -29,12 +29,12 @@ public class DeptListServlet extends HttpServlet {
 
     // 优化，将转发，替换成了 重定向的机制，（重定向的机制）是自发到浏览器前端的地址栏上的，后自发的执行
     // 地址栏上是 doGet 请求的，就不需要 doPost 请求了。
-    @Override
+   /* @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException,
             IOException {
         doGet(request, response); // 调用本身这里的doGet()请求
 
-    }
+    }*/
 
     /*
         因为我们前端使用的是 <a>超链接，是goGet请求所以，
@@ -51,6 +51,7 @@ public class DeptListServlet extends HttpServlet {
         ResultSet resultSet = null;
 
         // 获取到该webapp的项目根路径：也就是在Tomcat 当中设置的访问的项目路径
+        // 注意的是: getContextPath()获取返回的路径是带有 "/项目名"的，所以不要多写了 /
         String contextPath = request.getContextPath();
 
 
