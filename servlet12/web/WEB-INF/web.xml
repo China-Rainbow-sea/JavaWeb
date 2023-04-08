@@ -12,6 +12,8 @@
     <servlet-mapping>
         <servlet-name>A</servlet-name>
         <url-pattern>/a</url-pattern>
+        <url-pattern>/aa</url-pattern>
+        <url-pattern>/aaa</url-pattern>
     </servlet-mapping>
 
 
