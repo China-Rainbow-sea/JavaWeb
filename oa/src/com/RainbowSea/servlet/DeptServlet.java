@@ -56,7 +56,8 @@ public class DeptServlet extends HttpServlet {
                 doModify(request,response);
             }
         } else {
-            response.sendRedirect(request.getContextPath());  // 访问的web 站点的根即可，自动找到的是名为 index.jsp 的欢迎页面
+            response.sendRedirect(request.getContextPath() + "/index.jsp");  // 访问的web 站点的根即可，自动找到的是名为 index.jsp
+            // 的欢迎页面（注意这里被优化修改了：局部优先）注意：这里修改了，需要指明index.jsp登录页面了，因为局部优先
         }
 
 
