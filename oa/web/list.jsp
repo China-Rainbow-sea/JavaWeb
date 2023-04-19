@@ -32,6 +32,11 @@
 
 <body>
 <h1 align="center">部门列表</h1>
+<%--显示登录的用户名信息--%>
+<h3><%=session.getAttribute("username")%></h3>  <%--注意这里使用的是 jsp 内置的 session 对象所以不可以，不要把 session 禁用了。--%>
+
+<a href="<%=request.getContextPath()%>/user/exit">安全退出系统(手动清除 session 会话信息)</a>
+
 <table border="1px" align="center" width="50%">
     <tr>
         <th>序号</th>
