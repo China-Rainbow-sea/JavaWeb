@@ -111,7 +111,34 @@ JSP中直接编写普通字符串:
  > 将Java当中的变量的值翻译到service()方法当中，
  <%@ page  %> 指令
 
- 
+
+JSP文件的扩展名必须是 xxx.jsp 吗？
+> jsp 文件的扩展名是可以配置的，不是固定的。
+在D:\dev\apache-tomcat-10.0.12\conf\web.xml ，这个文档中配置jsp文件的映射路径
+<!-- The mappings for the JSP servlet -->
+    <servlet-mapping>
+        <servlet-name>jsp</servlet-name>
+        <url-pattern>*.jsp</url-pattern>
+        <url-pattern>*.jspx</url-pattern>
+    </servlet-mapping>
+
+xxx.jsp 文件对于小猫咪来说，只是一个普通的文件，web容器会将xxx.jsp文件最终生成java程序，
+最终调用的还是java对象相关的方法，真正执行的时候，和jsp文件就没有关系了。
+
+
+包名 bean 是什么意思：
+ javabean （Java的logo 是一杯冒着热气的咖啡，javabean被翻译为：咖啡豆）
+ java 是一杯咖啡，咖啡又是由一粒一粒的咖啡豆研磨而成。
+ > 有无参数构造方法 ，无参构造器，反射机制
+ > 属性私有化
+ > 对外提供公开的set和get方法
+ > 实现java.io.Serializable 接口，反序列化
+ > 重写 toString
+ > 重写hashCode() + equals()方法 集合存储
+
+
+ JSP 的指令:
+ 指令的作用: 指导JSP的翻译引擎如何工作的。
 
 
 

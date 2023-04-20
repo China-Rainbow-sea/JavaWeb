@@ -137,3 +137,65 @@ xxx.jsp 文件对于小猫咪来说，只是一个普通的文件，web容器会
  > 重写hashCode() + equals()方法 集合存储
 
 
+ JSP 的指令:
+ 指令的作用: 指导JSP的翻译引擎如何工作的。
+
+- - 关于page指令当中都有哪些常用的属性呢？
+
+    - ```
+      <%@page session="true|false" %>
+      true表示启用JSP的内置对象session，表示一定启动session对象。没有session对象会创建。
+      如果没有设置，默认值就是session="true"
+      session="false" 表示不启动内置对象session。当前JSP页面中无法使用内置对象session。
+      ```
+
+    - ```
+      <%@page contentType="text/json" %>
+      contentType属性用来设置响应的内容类型
+      但同时也可以设置字符集。
+      <%@page contentType="text/json;charset=UTF-8" %>
+      ```
+
+    - ```
+      <%@page pageEncoding="UTF-8" %>
+      pageEncoding="UTF-8" 表示设置响应时采用的字符集。
+      ```
+
+    - ```
+      <%@page import="java.util.List, java.util.Date, java.util.ArrayList" %>
+      <%@page import="java.util.*" %>
+      import语句，导包。
+      ```
+
+    - ```
+      <%@page errorPage="/error.jsp" %>
+      当前页面出现异常之后，跳转到error.jsp页面。
+      errorPage属性用来指定出错之后的跳转位置。
+      ```
+
+    - ```
+      <%@page isErrorPage="true" %>
+      表示启用JSP九大内置对象之一：exception
+      默认值是false。
+      ```
+
+- JSP的九大内置对象
+
+  - jakarta.servlet.jsp.PageContext pageContext       页面作用域
+  - jakarta.servlet.http.HttpServletRequest request 请求作用域
+  - jakarta.servlet.http.HttpSession session  会话作用域
+  - jakarta.servlet.ServletContext application 应用作用域
+    - pageContext < request < session < application
+    - 以上四个作用域都有：setAttribute、getAttribute、removeAttribute方法。
+    - 以上作用域的使用原则：尽可能使用小的域。
+
+  - java.lang.Throwable exception
+
+  - jakarta.servlet.ServletConfig config
+
+  - java.lang.Object page  （其实是this，当前的servlet对象）
+
+  - jakarta.servlet.jsp.JspWriter out  （负责输出）
+  - jakarta.servlet.http.HttpServletResponse response （负责响应）
+
+
