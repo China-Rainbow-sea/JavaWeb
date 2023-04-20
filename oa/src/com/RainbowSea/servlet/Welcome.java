@@ -15,6 +15,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+
+/**
+ * 注意一点就是；我们这里的免十天登录，是访问对应 oa/ 这个登录的欢迎页面，我们web.xml 当中，
+ * 只有当oa/根项目的根路径的时候，才可以免10天登录的。其他是无法跳转到免登录的。
+ */
 @WebServlet("/welcome")
 public class Welcome extends HttpServlet {
 
@@ -81,7 +86,7 @@ public class Welcome extends HttpServlet {
 
             if (success) {
                 // 存储到cookie当中的用户名和密码正确
-                // 获取session ，主要是为了，防止用户没有通过路径就直接访问了。
+                // 获取session ，主要是为了，防止用户没有通过路径就直接访问了。(在DeptServlet 存在一个会话的判断)
                 HttpSession session = request.getSession();
                 session.setAttribute("username", userName);
                 // 重定向到用户列表当中

@@ -41,7 +41,6 @@ public class UserServlet extends HttpServlet {
         if (session != null) {
             // 手动销毁 session 对象
             // 注意：会话销毁的了，自然需要重写登录了，没有登录过，无法进行一个路径的访问的
-            // 因为会话集。
             session.invalidate();
 
 
@@ -106,10 +105,17 @@ public class UserServlet extends HttpServlet {
             // 这里使用重定向(没有资源的共享)：重定向需要加/项目名 +
 
             // 获取session 对象(这里的要求是： 必须获取到 session ,没有session 也要新建一个 session 对象)
+            // 注意：我们下面的这个会话是不能删除的，因为上面我们虽然通过 welcome Servlet 进行了一个会话
+            // 但是 welcome 当中是当我们cookie 当中存在并且用户名和密码正确的时候才会进行一个 session 的
             HttpSession session = request.getSession();  // 服务器当中没有 session 会话域自动创建
             session.setAttribute("username", username);  // 将用户名存储到 session 会话域当中
 
             // 判断用户是否选择了免十天登录的选择
+            // 通过创建 Cookie 缓存机制：
+            /*
+            将登录成功后，将用户名和密码都存储都 Cookie当中（服务器创建 cookie 信息）。客户端接收该cookie信息并存储起来。
+            注意：每一个对应的 cookie 信息都需要进行 （new Cookie() , setMaxAge() ,和 setPath() 响应到客户端）
+             */
             if ("true".equals(exempt)) {
                 // 创建 Cookie 对象存储登录名
                 Cookie cookie = new Cookie("username", username);
