@@ -6,6 +6,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -32,7 +33,25 @@ public class UserServlet extends HttpServlet {
 
     }
 
+
+    /**
+     * 用户手动点击安全退出，销毁 session 对象
+     * @param request
+     * @param response
+     * @throws IOException
+     */
     private void doExit(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        // 获取到客户端发送过来的 sessoin
+        HttpSession session = request.getSession();
+
+        if (session != null) {
+            // 手动销毁 session 对象
+            // 注意：会话销毁的了，自然需要重写登录了，没有登录过，无法进行一个路径的访问的
+            session.invalidate();
+
+            // 跳转会登录的页面
+            response.sendRedirect(request.getContextPath());  // 项目名路径默认就是访问的index.html 的欢迎页面
+        }
     }
 
     protected void doLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException,
@@ -84,6 +103,17 @@ public class UserServlet extends HttpServlet {
 
         // 登录成功与否
         if (success) {
+
+            // 成功，跳转到用户列表页面
+            // 这里使用重定向(没有资源的共享)：重定向需要加/项目名 +
+
+            // 获取session 对象(这里的要求是： 必须获取到 session ,没有session 也要新建一个 session 对象)
+            // 注意：我们下面的这个会话是不能删除的，因为上面我们虽然通过 welcome Servlet 进行了一个会话
+            // 但是 welcome 当中是当我们cookie 当中存在并且用户名和密码正确的时候才会进行一个 session 的
+            HttpSession session = request.getSession();  // 服务器当中没有 session 会话域自动创建
+            session.setAttribute("username", username);  // 将用户名存储到 session 会话域当中
+
+
             response.sendRedirect(request.getContextPath() + "/dept/list");
         } else {
             // 失败，跳转到失败页面

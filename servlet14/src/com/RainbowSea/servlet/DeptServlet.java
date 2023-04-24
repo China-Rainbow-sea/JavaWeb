@@ -7,6 +7,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -24,19 +26,38 @@ public class DeptServlet extends HttpServlet {
 
         String servletPath = request.getServletPath();  // 获取到浏览器当中的uri
 
-        // 双重的判断，一个是 session 会话域要存在，其次是 会话域当中存储了名为 "username" 的信息
-        if ("/dept/list".equals(servletPath)) {
-            doList(request, response);
-        } else if ("/dept/detail".equals(servletPath)) {
-            doDetail(request, response);
-        } else if ("/dept/delete".equals(servletPath)) {
-            doElete(request, response);
-        } else if ("/dept/save".equals(servletPath)) {
-            doSave(request, response);
-        } else if ("/dept/modify".equals(servletPath)) {
-            doModify(request, response);
-        }
+        // 获取session 这个 session 是不不需要新建的
+        // 只是获取当前session ,获取不到这返回null,
+        HttpSession session = request.getSession(false);  // 获取到服务器当中的session ，没有不会创建的
 
+
+        /**
+         * 说明这里我们通过 session 会话机制，判断用户是否登录过，如果用户没有登录就想要访问
+         * 到其信息，不可以，因为我们这里判断了一次是否登录过，只有登录入过了，才会将中登录到
+         * 用户名为 “username” 的信息存储到 session 会话当中，如果没有的话是查询不到的，返回的是 null
+         * 需要注意的一点就是，我们的jsp 当中的内置对象，是会自动创建一个 session 会话对象的，但是
+         * 因为这里我们进行了一个 双重的判断机制。注意：需要先将对应的 xx_jsp.java 生成才行。同时
+         * 使用 <%@page session = false %> 指令的话，需要所有会被访问，生成的 Jsp 文件都需要设置。
+         *
+         *   jakarta.servlet.http.HttpSession session = null;
+         *   session = pageContext.getSession();
+         */
+        if(session != null && session.getAttribute("username") != null) {
+            // 双重的判断，一个是 session 会话域要存在，其次是 会话域当中存储了名为 "username" 的信息
+            if ("/dept/list".equals(servletPath)) {
+                doList(request, response);
+            } else if ("/dept/detail".equals(servletPath)) {
+                doDetail(request, response);
+            } else if ("/dept/delete".equals(servletPath)) {
+                doElete(request,response);
+            } else if("/dept/save".equals(servletPath)) {
+                doSave(request,response);
+            } else if("/dept/modify".equals(servletPath)) {
+                doModify(request,response);
+            }
+        } else {
+            response.sendRedirect(request.getContextPath());  // 访问的web 站点的根即可，自动找到的是名为 index.jsp
+        }
 
     }
 

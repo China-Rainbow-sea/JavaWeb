@@ -27,7 +27,7 @@ public class Welcome extends HttpServlet {
 
         boolean success = false;
 
-        // 注意如果为客户端没有发送 cookie 信息，返回的是 null ,不是数组为 0
+
         String userName = null;
         String userPasswrod = null;
 
