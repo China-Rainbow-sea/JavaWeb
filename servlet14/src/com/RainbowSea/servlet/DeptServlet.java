@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 // 可以使用模糊查询 @WebServlet("/dept/*")
-@WebServlet({"/dept/list", "/dept/detail", "/dept/delete", "/dept/save", "/dept/modify"})
+@WebServlet({"/dept/list", "/dept/detail", "/dept/delete","/dept/save","/dept/modify"})
 public class DeptServlet extends HttpServlet {
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException,
@@ -56,15 +56,17 @@ public class DeptServlet extends HttpServlet {
                 doModify(request,response);
             }
         } else {
-            response.sendRedirect(request.getContextPath());  // 访问的web 站点的根即可，自动找到的是名为 index.jsp
+            response.sendRedirect(request.getContextPath() + "/index.jsp");  // 访问的web 站点的根即可，自动找到的是名为 index.jsp
+            // 的欢迎页面（注意这里被优化修改了：局部优先）注意：这里修改了，需要指明index.jsp登录页面了，因为局部优先
         }
+
+
 
     }
 
 
     /**
      * 修改部门信息
-     *
      * @param request
      * @param response
      */
@@ -118,7 +120,6 @@ public class DeptServlet extends HttpServlet {
 
     /**
      * 保存部门信息
-     *
      * @param request
      * @param response
      */
@@ -175,7 +176,6 @@ public class DeptServlet extends HttpServlet {
 
     /**
      * 通过部门删除部门
-     *
      * @param request
      * @param response
      */
@@ -249,7 +249,6 @@ public class DeptServlet extends HttpServlet {
 
     /**
      * 通过部门编号，查询部门的详情
-     *
      * @param request
      * @param response
      */
@@ -319,7 +318,7 @@ public class DeptServlet extends HttpServlet {
         //<a href="<%=request.getContextPath()%>/dept/detail?f=edit&dno=<%=dept.getDeptno()%>">修改</a>
         //<a href="<%=request.getContextPath()%>/dept/detail?f=detail&dno=<%=dept.getDeptno()%>">详情</a>
         String forward = "/" + request.getParameter("f") + ".jsp";
-        request.getRequestDispatcher(forward).forward(request, response);
+        request.getRequestDispatcher(forward).forward(request,response);
     }
 
 
