@@ -1,15 +1,18 @@
 package com.RainbowSea.bean;
 
+
+
 import java.io.Serializable;
 import java.util.Objects;
 
-public class Dept implements Serializable {
+public class Dept implements Serializable{
 
     private static final long serialVersionUID = 1L;
 
     private String deptno;
     private String dname;
     private String loc;
+
 
 
     public Dept() {

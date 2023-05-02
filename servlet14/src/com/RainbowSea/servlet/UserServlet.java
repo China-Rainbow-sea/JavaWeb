@@ -1,6 +1,7 @@
 package com.RainbowSea.servlet;
 
 import com.RainbowSea.DBUtil.DBUtil;
+import com.RainbowSea.bean.User;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.Cookie;
@@ -38,7 +39,11 @@ public class UserServlet extends HttpServlet {
         // 获取到客户端发送过来的 sessoin
         HttpSession session = request.getSession();
 
+
         if (session != null) {
+
+            session.removeAttribute("username");  // 移除该username 的信息
+            session.removeAttribute("user");  // 移除该 user 的信息
             // 手动销毁 session 对象
             // 注意：会话销毁的了，自然需要重写登录了，没有登录过，无法进行一个路径的访问的
             session.invalidate();
@@ -109,6 +114,8 @@ public class UserServlet extends HttpServlet {
             // 但是 welcome 当中是当我们cookie 当中存在并且用户名和密码正确的时候才会进行一个 session 的
             HttpSession session = request.getSession();  // 服务器当中没有 session 会话域自动创建
             session.setAttribute("username", username);  // 将用户名存储到 session 会话域当中
+
+            session.setAttribute("user",new User(username,password));
 
             // 判断用户是否选择了免十天登录的选择
             // 通过创建 Cookie 缓存机制：

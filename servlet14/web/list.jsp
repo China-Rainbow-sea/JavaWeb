@@ -1,5 +1,6 @@
 <%@ page import="com.RainbowSea.bean.Dept" %>
 <%@ page import="java.util.List" %>  <%--这是导包在jSP 当中，并翻译为import导入对于的报--%>
+<%@ page import="java.lang.Integer" %>
 <%@page contentType="text/html; charset=utf-8" %>
 
 <!DOCTYPE html>
@@ -33,7 +34,15 @@
 <body>
 <h1 align="center">部门列表</h1>
 <%--显示登录的用户名信息--%>
-<h3><%=session.getAttribute("username")%></h3>  <%--注意这里使用的是 jsp 内置的 session 对象所以不可以，不要把 session 禁用了。--%>
+<%--<%
+
+    ServletContext servletContext = session.getServletContext();
+    Object onlinecount = servletContext.getAttribute("onlinecount");
+
+%>--%>
+<%--显示用户在线的个数，其信息存储在了 ServletContext()应用域当中了--%>
+<h3>在线人数: <%=request.getServletContext().getAttribute("onlinecount")%></h3>
+<%--注意这里使用的是 jsp 内置的 session 对象所以不可以，不要把 session 禁用了。--%>
 
 <a href="<%=request.getContextPath()%>/user/exit">安全退出系统(手动清除 session 会话信息)</a>
 

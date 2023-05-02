@@ -7,7 +7,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
+
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -18,18 +18,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 // 可以使用模糊查询 @WebServlet("/dept/*")
-@WebServlet({"/dept/list", "/dept/detail", "/dept/delete","/dept/save","/dept/modify"})
+@WebServlet({"/dept/list", "/dept/detail", "/dept/delete", "/dept/save", "/dept/modify"})
 public class DeptServlet extends HttpServlet {
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException,
             IOException {
 
         String servletPath = request.getServletPath();  // 获取到浏览器当中的uri
-
-        // 获取session 这个 session 是不不需要新建的
-        // 只是获取当前session ,获取不到这返回null,
-        HttpSession session = request.getSession(false);  // 获取到服务器当中的session ，没有不会创建的
-
 
         /**
          * 说明这里我们通过 session 会话机制，判断用户是否登录过，如果用户没有登录就想要访问
@@ -42,24 +37,18 @@ public class DeptServlet extends HttpServlet {
          *   jakarta.servlet.http.HttpSession session = null;
          *   session = pageContext.getSession();
          */
-        if(session != null && session.getAttribute("username") != null) {
-            // 双重的判断，一个是 session 会话域要存在，其次是 会话域当中存储了名为 "username" 的信息
-            if ("/dept/list".equals(servletPath)) {
-                doList(request, response);
-            } else if ("/dept/detail".equals(servletPath)) {
-                doDetail(request, response);
-            } else if ("/dept/delete".equals(servletPath)) {
-                doElete(request,response);
-            } else if("/dept/save".equals(servletPath)) {
-                doSave(request,response);
-            } else if("/dept/modify".equals(servletPath)) {
-                doModify(request,response);
-            }
-        } else {
-            response.sendRedirect(request.getContextPath() + "/index.jsp");  // 访问的web 站点的根即可，自动找到的是名为 index.jsp
-            // 的欢迎页面（注意这里被优化修改了：局部优先）注意：这里修改了，需要指明index.jsp登录页面了，因为局部优先
+        // 双重的判断，一个是 session 会话域要存在，其次是 会话域当中存储了名为 "username" 的信息
+        if ("/dept/list".equals(servletPath)) {
+            doList(request, response);
+        } else if ("/dept/detail".equals(servletPath)) {
+            doDetail(request, response);
+        } else if ("/dept/delete".equals(servletPath)) {
+            doElete(request, response);
+        } else if ("/dept/save".equals(servletPath)) {
+            doSave(request, response);
+        } else if ("/dept/modify".equals(servletPath)) {
+            doModify(request, response);
         }
-
 
 
     }
@@ -67,6 +56,7 @@ public class DeptServlet extends HttpServlet {
 
     /**
      * 修改部门信息
+     *
      * @param request
      * @param response
      */
@@ -120,12 +110,12 @@ public class DeptServlet extends HttpServlet {
 
     /**
      * 保存部门信息
+     *
      * @param request
      * @param response
      */
     private void doSave(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-        request.setCharacterEncoding("UTF-8");
 
         // 获取到前端的数据，建议 name 使用复制
         String deptno = request.getParameter("deptno");
@@ -176,6 +166,7 @@ public class DeptServlet extends HttpServlet {
 
     /**
      * 通过部门删除部门
+     *
      * @param request
      * @param response
      */
@@ -249,6 +240,7 @@ public class DeptServlet extends HttpServlet {
 
     /**
      * 通过部门编号，查询部门的详情
+     *
      * @param request
      * @param response
      */
@@ -318,7 +310,7 @@ public class DeptServlet extends HttpServlet {
         //<a href="<%=request.getContextPath()%>/dept/detail?f=edit&dno=<%=dept.getDeptno()%>">修改</a>
         //<a href="<%=request.getContextPath()%>/dept/detail?f=detail&dno=<%=dept.getDeptno()%>">详情</a>
         String forward = "/" + request.getParameter("f") + ".jsp";
-        request.getRequestDispatcher(forward).forward(request,response);
+        request.getRequestDispatcher(forward).forward(request, response);
     }
 
 
