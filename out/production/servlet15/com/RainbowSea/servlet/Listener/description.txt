@@ -1,0 +1,60 @@
+Listener 监听器:
+
+
+什么是监听器:
+监听器是Servlet规范中一员，就像Filter 一样，Filter也是Servlet规范中的一员.
+在Servlet中，所有的监听器接口都是以 "Listener" 结尾的。
+
+监听器有什么用?
+ 监听器实际上是Servlet 规范留给我们的javaWeb程序员的特殊时机
+  特殊的时刻如果想执行这段代码，你需要想到使用对应的监听器.
+
+Servlet 规范中提供了哪些监听器：
+  jakarta.servlet 包下:'
+  ServletContextListener;
+
+
+  ServletContextAttrbuteListener;
+  ServletRequestListener;
+
+
+  ServletRequestAttributeListener;
+  jakarta.servlet.http包下:
+  HttpSessionListener;
+  HttpSessionAttrbuteListener;
+  HttpSessionBingingListener;
+  HttpSessionListener;
+  HttpSessionActivationListener;
+
+
+  file:///D:/dev/apache-tomcat-10.0.12-fulldocs/tomcat-10.0-doc/servletapi/jakarta/servlet/package-summary.html
+
+
+  配置Listener的两种方式：一种是 web.xml中 <listener> 另一种是注解@WebListener()
+
+  注意：所有的监听器中的方法都是不需要 javaWeb程序员调用的，都是由服务器调用？什么时候调用？
+  > 当某个特殊的事件发生（特殊的事件发生其实就是某个时机到了。）之后，被web服务器自动调用。
+
+
+思考一个业务场景:
+  请编写一个功能: 记录该网站实时在线数量，这个该怎么办？
+  我们可以通过服务器有没有分配 session 对象，因为一个 session 代表一个用户，有一个session就代表有一个用户，
+  如果你采用这种逻辑去实现的话，session 有多少个，在线用户就有多少个，这种方式的话，HttpSessionListener够用，
+  则count++,然后将 count 存储到ServletContext域当中，在页面显示在线人数即可。
+
+  业务发生改变了，只统计登录用户的在线数量，这个该怎么办？
+    session.serAttribute("user",UserObj)
+    用户登录的标志是什么？session中曾经存储过 User类型的对象，那么这个时候可以让User类型的对象
+    实现HttpSessionBidingListener监听器，只要 User类型对象存储到session域中，则count++,
+    然后将count++存储到ServletContext()应用域对象中。页面显示在线人数即可。
+
+
+  实现 oa项目当前登录在线的人数》
+  什么代表着用户登录：
+   session.setAttribute("User",userObj) User类型对象只要往 session存储过，表示用户登录
+
+  什么代表着用户退出了
+   session.removeAttribute("User") User类型的对象从 session 域中移除了。
+   或者有可能是 session 销毁了，(session 超时了)
+
+
