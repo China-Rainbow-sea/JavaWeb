@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="https://jakarta.ee/xml/ns/jakartaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd"
+         version="5.0">
+
+    <filter>
+        <filter-name>FilterB</filter-name>
+        <filter-class>com.RainbowSea.filter.FilterB</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>FilterB</filter-name>
+        <url-pattern>/A</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <!--        两个 name 名是要保持一致的-->
+        <filter-name>FilterA</filter-name>
+        <!--        对应的全类路径名,全类限定名-->
+        <filter-class>com.RainbowSea.filter.FilterA</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>FilterA</filter-name>
+        <!--        Filter 的映射路径，以 / 开始-->
+        <url-pattern>/A</url-pattern>
+    </filter-mapping>
+
+
+
+
+</web-app>
