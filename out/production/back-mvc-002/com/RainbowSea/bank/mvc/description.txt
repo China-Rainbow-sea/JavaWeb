@@ -1,0 +1,25 @@
+service transfer: com.mysql.cj.jdbc.ConnectionImpl@27766576
+selectByActno :com.mysql.cj.jdbc.ConnectionImpl@50b6facf
+selectByActno :com.mysql.cj.jdbc.ConnectionImpl@2cacd219
+update: com.mysql.cj.jdbc.ConnectionImpl@5df34760
+
+
+存在一个问题就是：我们这里的service 层虽然进行了事务的控制，但是这里的使用的 Connection事务控制
+的对象是不一致的，也就是说：我们Connection的事务控制对应不上，我们对数据库修改的操作上，就导致无法对
+数据库进行事务控制。
+
+
+解决方式：
+让它们使用同一个 Connection 事务控制对象，怎么同用一个Connection呢，
+可以通过传递参数的方式实现：
+需要注意的是：既然我们是共用了Connection 对象了，就不可以随便的关闭了。
+
+同一个线程中的线程是一样的值。
+ Thread thread = Thread.currentThread();  // 获取当前线程
+
+
+ threadLocal.remove();  // 注意关闭资源的时候需要将绑定在threadLocal移除
+ Tomcat服务器是多线程的，其中内置了一个线城池，其中线程池中的线程是会被重复利用的，
+ 当一个新的用户出现，可能会获取到上面对应Connection 已经关闭了的 对应上的 key thread线程对象，
+ 从而出现错误。
+
