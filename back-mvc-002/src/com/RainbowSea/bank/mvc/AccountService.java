@@ -38,7 +38,7 @@ public class AccountService {
         Connection connection = DBUtil.getConnection(); // 从ThreadLocal获取到的
         // service 层控制事务：
         // 事务的控制需要 Connection 对象
-        try {  // 自动管理，会自动关闭资源
+        try {
             // 开启事务
             connection.setAutoCommit(false);
 

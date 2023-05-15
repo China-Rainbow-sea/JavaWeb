@@ -7,7 +7,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Collection;
 import java.util.List;
 
 /**
@@ -97,6 +96,10 @@ public class AccountDao {
     public int update(Account account) {
         Connection connection = DBUtil.getConnection();
         PreparedStatement preparedStatement = null;
+
+        Thread thread = Thread.currentThread(); // 获取当前线程
+        System.out.println("AccountDao Thread :" + thread);
+
         int count = 0;
 
         try {
